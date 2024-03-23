@@ -94,6 +94,7 @@ h1 {
   display: flex;
   gap: 4px;
   margin-bottom: 4px;
+  perspective: 600px;
 }
 
 .cell {
@@ -128,16 +129,40 @@ h1 {
   background: var(--color-success);
   border-color: var(--color-success);
   color: white;
+  animation: rotateCell 1s linear;
 }
 .cell.incorrect {
   background: var(--color-gray-300);
   border-color: var(--color-gray-300);
   color: white;
+  animation: rotateCell 1s linear;
 }
 .cell.misplaced {
   background: var(--color-warning);
   border-color: var(--color-warning);
   color: white;
+  animation: rotateCell 1s linear;
+}
+@keyframes rotateCell {
+  from {
+    background: white;
+    border: 2px solid var(--color-gray-700);
+    color: transparent;
+    transform: rotateX(-180deg);
+  }
+  50% {
+    background: white;
+    border: 2px solid var(--color-gray-300);
+    color: transparent;
+    transform: rotateX(-90deg);
+  }
+  50% {
+    background: inherit;
+    border-color: inherit;
+  }
+  to {
+    transform: rotateX(0deg);
+  }
 }
 
 .guess-input-wrapper {
@@ -251,12 +276,32 @@ h1 {
 .key.correct {
   background: var(--color-success);
   color: white;
+  animation: keyTransition 1s linear;
 }
 .key.misplaced {
   background: var(--color-warning);
   color: white;
+  animation: keyTransition 1s linear;
 }
 .key.incorrect {
   background: var(--color-gray-300);
   color: white;
+  animation: keyTransition 1s linear;
+}
+
+@keyframes keyTransition {
+  from {
+    background: var(--color-gray-900);
+    color: black;
+  }
+  50% {
+    background: var(--color-gray-900);
+    color: black;
+  }
+  50% {
+    background: inherit;
+    color: inherit;
+  }
+  to {
+  }
 }

@@ -15,10 +15,8 @@ function BannerLoose({answer}) {
   </div>
 }
 
-function EndBanner({finished, count, answer}) {
-  if(finished === "win")
-    return <BannerWin count={count}/>
-  return <BannerLoose answer={answer}/>
+function EndBanner({className, children}) {
+  return <div className={`banner ${className}`}>{children}</div>
 }
 
 export default EndBanner;

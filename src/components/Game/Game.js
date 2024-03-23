@@ -8,6 +8,8 @@ import {checkGuess} from "../../game-helpers";
 import {NUM_OF_GUESSES_ALLOWED} from "../../constants";
 import EndBanner from "../EndBanner";
 import KeyBoard from "../KeyBoard";
+import WinBanner from "../WinBanner";
+import LooseBanner from "../LooseBanner";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -21,6 +23,7 @@ function Game() {
 
   function addGuess(guess) {
     const check = checkGuess(guess, answer);
+    const newList = [...guessList, check];
     const newLetterState = {...letterState}
     let right = 0;
     for(let letter of check) {
@@ -32,10 +35,10 @@ function Game() {
     if(right === 5) {
       setFinished("win");
     }
-    else if(guessList.length === NUM_OF_GUESSES_ALLOWED-1) {
+    else if(newList.length === NUM_OF_GUESSES_ALLOWED) {
       setFinished("loose");
     }
-    setGuessList([...guessList, check]);
+    setGuessList(newList);
     setLetterState(newLetterState);
   }
 
@@ -43,7 +46,8 @@ function Game() {
     <GuessResults guessList={guessList}/>
     <GuessInput addGuess={addGuess} locked={finished !== undefined}/>
     <KeyBoard letterState={letterState}/>
-    {finished !== undefined && <EndBanner finished={finished} count={guessList.length} answer={answer}/>}
+    {finished === 'win' && <WinBanner count={guessList.length}/>}
+    {finished === 'loose' && <LooseBanner answer={answer}/>}
   </>;
 }
 

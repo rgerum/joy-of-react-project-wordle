@@ -6,10 +6,8 @@ const keys = [
     'ZXCVBNM'.split('')
 ]
 function KeyBoard({letterState}) {
-    console.log(letterState);
 
     function letterClass(letter) {
-        console.log(letter, letterState[letter])
         return letterState[letter] ?
             `key ${letterState[letter]}`
             : 'key'
@@ -17,9 +15,9 @@ function KeyBoard({letterState}) {
 
   return <div className={"keyboard"}>
     {keys.map((row, i) => (
-        <div className="keyboard_row">
+        <div className="keyboard_row" key={i}>
           {row.map((letter, i) => (
-              <div className={letterClass(letter)}>{letter}</div>
+              <div className={letterClass(letter)} key={i}>{letter}</div>
           ))}
         </div>
     ))}
