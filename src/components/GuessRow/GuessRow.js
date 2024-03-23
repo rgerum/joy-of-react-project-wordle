@@ -1,10 +1,17 @@
 import React from 'react';
 import {range} from "../../utils";
 
+function Cell({status, letter}) {
+  const className = status ?
+       `cell ${status}` : 'cell';
+
+  return <span className={className}>{letter}</span>
+}
+
 function GuessRow({guess}) {
   return <p className="guess">{
     range(5).map(i => (
-      <span className={"cell "+(guess && guess[i].status)} key={i}>{guess && guess[i]?.letter}</span>
+        <Cell key={i} status={guess && guess[i].status} letter={guess && guess[i].letter} />
     ))
   }</p>;
 }
